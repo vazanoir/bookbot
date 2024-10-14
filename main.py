@@ -33,9 +33,9 @@ def process_file(file):
         print("└───────────┴─────────────┘\n\n")
 
 
-def left_pad(string, size):
-    for _ in range(size - len(string)):
-        string = " " + string
+def left_pad(str, size):
+    for _ in range(size - len(str)):
+        string = " " + str
     return string
 
 
