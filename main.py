@@ -35,8 +35,8 @@ def process_file(file):
 
 def left_pad(str, size):
     for _ in range(size - len(str)):
-        string = " " + str
-    return string
+        str = " " + str
+    return str
 
 
 def word_count(str):
