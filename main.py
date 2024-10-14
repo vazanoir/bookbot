@@ -20,7 +20,7 @@ def process_file(file):
         print(f"╺ {file} ╸")
 
         print("┌───────┬─────────────────┐")
-        print(f"│ words │ {padding(word_count(file_contents), 15)} │")
+        print(f"│ words │ {left_pad(str(word_count(file_contents)), 15)} │")
         print("└───────┴─────────────────┘")
 
         chars = char_count(file_contents)
@@ -29,13 +29,13 @@ def process_file(file):
         print("├───────────┼─────────────┤")
         for c in sorted(chars, key=chars.get, reverse=True):
             if ord(c) in range(97, 123):
-                print(f"│ {padding(c, 9)} │ {padding(chars[c], 11)} │")
+                print(f"│ {left_pad(c, 9)} │ {left_pad(str(chars[c]), 11)} │")
         print("└───────────┴─────────────┘\n\n")
 
 
-def padding(string, size):
-    for i in range(size - len(str(string))):
-        string = " " + str(string)
+def left_pad(string, size):
+    for _ in range(size - len(string)):
+        string = " " + string
     return string
 
 
