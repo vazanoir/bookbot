@@ -1,17 +1,42 @@
+import sys
+from os import path
+
+
 def main():
-    file = "books/frankenstein.txt"
+    if len(sys.argv) < 2:
+        print("error: no path to file given")
+        sys.exit(1)
+
+    for i in range(1, len(sys.argv)):
+        arg = sys.argv[i]
+        if path.isfile(arg):
+            process_file(arg)
+
+
+def process_file(file):
     with open(file) as f:
         file_contents = f.read()
 
-        print(f"--- Begin report of {file} ---")
-        print(f"{word_count(file_contents)} words found in the document\n")
+        print(f"╺ {file} ╸")
+
+        print("┌───────┬────────────────┐")
+        print(f"│ words │ {padding(word_count(file_contents), 14)} │")
+        print("└───────┴────────────────┘")
 
         chars = char_count(file_contents)
+        print("┌───────────┬────────────┐")
+        print("│ character │ occurences │")
+        print("├───────────┼────────────┤")
         for c in sorted(chars, key=chars.get, reverse=True):
             if ord(c) in range(97, 123):
-                print(f"The '{c}' character was found {chars[c]} times")
+                print(f"│ {padding(c, 9)} │ {padding(chars[c], 10)} │")
+        print("└───────────┴────────────┘\n\n")
 
-        print("--- End report ---")
+
+def padding(string, size):
+    for i in range(size - len(str(string))):
+        string = " " + str(string)
+    return string
 
 
 def word_count(str):
